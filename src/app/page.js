@@ -1,94 +1,82 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import hazardImage from "/src/app/images/Eden-HazardPNG.png";
+import garciaImage from "/src/app/images/GonzaloPNG.png";
+import benzemaImage from "/src/app/images/KarimPNG.png";
+import RonaldoImage from "/src/app/images/Ronaldo.jpg";
+import MarcImage from "/src/app/images/Marc.jpg";
+import TñigoImage from "/src/app/images/Tñigo.jpg";
+import GaviImage from "/src/app/images/Gavi.jpg";
+import MessiImage from "/src/app/images/Messi.jpg";
+
+/*import styles from "./page.module.css";
+import hazardImage from "./images/hazard.jpg";
+import garciaImage from "./images/garcia.jpg";
+import benzemaImage from "./images/benzema.jpg";*/
+
+const jugadorImages = {
+  "Eden Hazard": hazardImage,
+  "Gonzalo Garcia": garciaImage,
+  "Karim Benzema": benzemaImage,
+  "Cristiano Ronaldo": RonaldoImage,
+  "Marc-Andre ter Stegen": MarcImage,
+  "Tñigo Martinez": TñigoImage,
+  "Gavi": GaviImage,
+  "Leonel Messi": MessiImage,
+  // Puedes agregar otros jugadores según sea necesario
+};
+
+const Equipos = ({ equipos }) => {
+  return (
+    <div className={styles.container__list}>
+      <h2 className={styles.title}>Equipos de Futbol</h2>
+      {equipos.map((equipo) => (
+        <div key={equipo.id}>
+          <h3 className={styles.nameclub}>{equipo.nombre}</h3>
+          <ul>
+            {equipo.plantilla.map((jugador) => (
+              <li className={styles.container__list} key={jugador.id}>
+                <strong>{jugador.nombre}</strong>
+                <img src={jugadorImages[jugador.nombre]} alt={jugador.nombre} />
+                <p>Altura: {jugador.Altura}m <br /> Peso: {jugador.Peso}Kg</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default function Home() {
+  const equiposData = [
+    {
+      "id": 1,
+      "nombre": "Real Madrid",
+      "plantilla": [
+        {"id": 1, "nombre": "Eden Hazard", "Altura": "1.75", "Peso": "74Kg"},
+        {"id": 2, "nombre": "Gonzalo Garcia", "Altura": "1.82", "Peso": "74Kg"},
+        {"id": 3, "nombre": "Karim Benzema", "Altura": "1.85", "Peso": "81Kg"},
+        {"id": 4, "nombre": "Cristiano Ronaldo", "Altura": "1.83", "Peso": "82Kg"}
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Barcelona",
+      "plantilla": [
+        {"id": 1, "nombre": "Marc-Andre ter Stegen", "Altura": "1.75", "Peso": "74Kg"},
+        {"id": 2, "nombre": "Tñigo Martinez", "Altura": "1.82", "Peso": "74Kg"},
+        {"id": 3, "nombre": "Gavi", "Altura": "1.85", "Peso": "81Kg"},
+        {"id": 4, "nombre": "Leonel Messi", "Altura": "1.10", "Peso": "50Kg"}
+      ]
+    }
+    // Puedes agregar otros equipos
+  ];
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div>
+        <h1>Mi Aplicacion de Futbol</h1>
+        <Equipos equipos={equiposData} />
       </div>
     </main>
   );
